@@ -1,0 +1,66 @@
+
+<br>
+<div>
+    <label>Name</label> <input type="text" [(ngModel)]="newCat[0].name"> 
+    <label>Race</label> <input type="text" [(ngModel)]="newCat[0].race">
+    <label>Img</label><input type="text" [(ngModel)]="newCat[0].img"> 
+    <button (click)=addCat()>Add</button>   
+</div>
+
+<br>    
+<div>
+<table border="2">
+    <tr>
+        <th>First Name</th> 
+        <th>Race</th>
+        <th>Description</th> 
+        <th>Image</th> 
+        <th>buttons</th>
+    </tr>
+    <tr *ngFor="let cat of cats">
+        <td>{{cat.name}}</td> 
+        <td>{{cat.race | uppercase | convertToSpace: '-'}}</td> 
+        <td>{{cat.description}}</td>
+        <td (click)="setCurrentCat(cat)"><img [src]="cat.img" [style.width.px]="100"></td>
+        <td>
+            <button (click)="updateCat()">Edit</button>
+            <button (click)="removeCat(cat)">Delete</button>
+        </td>
+    </tr>
+</table>
+
+</div>
+
+<div>
+    <cat-description [cat]='currentCat'></cat-description>
+</div>
+
+
+<div class="panel panel-primary">
+    <table border="2">
+        <tr>
+            <th>id</th>
+            <th>nombrePost</th>
+            <th>description</th>
+        </tr>
+        <tr *ngFor="let public of photos">
+            <td>{{public._id}}</td>
+            <td>{{public.namePost}}</td>
+            <td>{{public.description}}</td>
+        </tr>
+    </table>
+    
+</div>
+<!--
+<div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div *ngFor="let photo of photos">
+        <img [src]="photo.thumbnailUrl" alt="">
+        {{photo.id}} && {{photo.title}}
+        <br>
+    </div>
+</div>
+
+-->
+
+

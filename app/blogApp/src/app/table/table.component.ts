@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ICat} from './cat';
 import {ProductService} from './table.service';
 
+import {IProduct} from './product';
+
 @Component({
   selector: 'table-component',
   templateUrl: './table.component.html',
@@ -20,7 +22,15 @@ export class TableComponent{
     {name: 'maya',  race: 'yellow', description: 'este es maya', img:'https://ep01.epimg.net/tecnologia/imagenes/2015/06/25/actualidad/1435248518_445335_1435251285_noticia_normal.jpg'},
     {name: 'toby',  race: 'brown', description: 'este es toby', img:'https://notasdemascotas.com/wp-content/uploads/2015/02/que-hacer-cuando-traes-un-gatito-a-casa-324x235.jpg'}
   ]
+  //---------------------------------------------------------
 
+  newProduct: IProduct[] = [{_id:'',name:'',description:'',brand:'',price:'',units:''}];
+  
+  products: IProduct[] = [
+    {_id:'',name:'',description:'',brand:'', price: '', units:''}
+  ]
+
+  //---------------------------------------------------------
   constructor(private _productService: ProductService){
     
   }
@@ -30,6 +40,49 @@ export class TableComponent{
       photos => this.photos = photos,
       error => this.errorMessage = <any>error);
   }
+
+  actTab(): void{
+    this._productService.getProducts().subscribe(
+      photos => this.photos = photos,
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  //---------------------------------------------------------
+
+  
+  addProduct(): void{
+    //let body = JSON.stringify(this.newProduct[0]);
+    console.log("Product added: " + this.newProduct);
+    this._productService.postProduct(this.newProduct[0]).subscribe(
+      photos => this.photos = photos,
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  removeProduct(id): void{
+    console.log("ID product:" + id);
+    this._productService.deleteProduct(id).subscribe(
+      photos => this.photos = photos,
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  updateProduct(product): void{
+    this._productService.putProduct(product).subscribe(
+      photos => this.photos = photos,
+      error => this.errorMessage = <any>error
+    );
+  }
+  
+
+
+
+
+
+
+//---------------------------------------------------------
+
 
   removeCat(cat): void{
     this.cats = this.cats.filter((x)=>{

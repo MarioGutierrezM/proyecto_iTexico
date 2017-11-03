@@ -1,4 +1,4 @@
-
+<div class="container">
 <br>
 <div>
     <label>Name</label> <input type="text" [(ngModel)]="newCat[0].name"> 
@@ -9,7 +9,7 @@
 
 <br>    
 <div>
-<table border="2">
+<table class="table table-bordered">
     <tr>
         <th>First Name</th> 
         <th>Race</th>
@@ -37,21 +37,44 @@
 
 
 <div class="panel panel-primary">
-    <table border="2">
+    <div>
+        <label>Name</label> <input type="text" [(ngModel)]="newProduct[0].name"> 
+        <label>Description</label> <input type="text" [(ngModel)]="newProduct[0].description">
+        <label>Brand</label> <input type="text" [(ngModel)]="newProduct[0].brand">
+        <label>Price</label> <input type="text" [(ngModel)]="newProduct[0].price">
+        <label>Units</label> <input type="text" [(ngModel)]="newProduct[0].units">
+        <button (click)="addProduct()" class="btn btn-success">Add</button>   
+    </div>
+    <button (click)="actTab()" class="btn btn-default">Actualizar Productos</button>
+    <hr>
+    <table class="table table-bordered">
         <tr>
-            <th>id</th>
-            <th>nombrePost</th>
-            <th>description</th>
+            <th>Id</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Units</th>
+            <th>Buttons</th>
         </tr>
-        <tr *ngFor="let public of photos">
-            <td>{{public._id}}</td>
-            <td>{{public.namePost}}</td>
-            <td>{{public.description}}</td>
+        <tr *ngFor="let product of photos">
+            <td>{{product._id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.brand}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.units}}</td>
+            <td>
+                <button (click)="updateProduct()" class="btn btn-primary">Edit</button>
+                <button (click)="removeProduct(product._id)" class="btn btn-danger">Delete</button>
+            </td>
         </tr>
     </table>
-    
 </div>
-<!--
+
+
+
+<!-- cuadros colores
 <div class="panel panel-primary">
     <div class="panel-heading"></div>
     <div *ngFor="let photo of photos">
@@ -62,5 +85,9 @@
 </div>
 
 -->
+
+    
+</div> 
+
 
 

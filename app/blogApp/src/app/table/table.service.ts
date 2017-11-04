@@ -20,8 +20,6 @@ export class ProductService{
         .do(data=>console.log('Data' + JSON.stringify(data)))
         .catch(this.handleError);
     }
-
-    //---------------------------------------------------------
     
     postProduct(body:IProduct): Observable<IProduct>{
         //let body = JSON.stringify(newCat[0]);
@@ -42,11 +40,6 @@ export class ProductService{
         .catch(this.handleError);
     }
     
-    
-    //---------------------------------------------------------
-
-    
-
     private handleError(err: HttpErrorResponse){
         console.log(err.message);
         return Observable.throw(err.message);

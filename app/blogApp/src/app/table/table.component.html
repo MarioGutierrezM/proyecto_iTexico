@@ -1,93 +1,143 @@
-<div class="container">
-<br>
 <div>
-    <label>Name</label> <input type="text" [(ngModel)]="newCat[0].name"> 
-    <label>Race</label> <input type="text" [(ngModel)]="newCat[0].race">
-    <label>Img</label><input type="text" [(ngModel)]="newCat[0].img"> 
-    <button (click)=addCat()>Add</button>   
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img alt="Sport World Shop"></a>
+            </div>
+            <div class="navbar-body">
+                <p class="navbar-brand navbar-right" href="#"><img alt="Contac Us"></p>
+                <a class="navbar-brand navbar-right" href="#"><img alt="Products"></a>
+                <a class="navbar-brand navbar-right" href="#"><img alt="Home"></a>
+            </div>
+        </div>
+    </nav>
 </div>
 
-<br>    
-<div>
-<table class="table table-bordered">
-    <tr>
-        <th>First Name</th> 
-        <th>Race</th>
-        <th>Description</th> 
-        <th>Image</th> 
-        <th>buttons</th>
-    </tr>
-    <tr *ngFor="let cat of cats">
-        <td>{{cat.name}}</td> 
-        <td>{{cat.race | uppercase | convertToSpace: '-'}}</td> 
-        <td>{{cat.description}}</td>
-        <td (click)="setCurrentCat(cat)"><img [src]="cat.img" [style.width.px]="100"></td>
-        <td>
-            <button (click)="updateCat()">Edit</button>
-            <button (click)="removeCat(cat)">Delete</button>
-        </td>
-    </tr>
-</table>
+<hr><hr><hr>
 
-</div>
-
-<div>
-    <cat-description [cat]='currentCat'></cat-description>
-</div>
-
-
-<div class="panel panel-primary">
-    <div>
-        <label>Name</label> <input type="text" [(ngModel)]="newProduct[0].name"> 
-        <label>Description</label> <input type="text" [(ngModel)]="newProduct[0].description">
-        <label>Brand</label> <input type="text" [(ngModel)]="newProduct[0].brand">
-        <label>Price</label> <input type="text" [(ngModel)]="newProduct[0].price">
-        <label>Units</label> <input type="text" [(ngModel)]="newProduct[0].units">
-        <button (click)="addProduct()" class="btn btn-success">Add</button>   
+<div class="container"> 
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add Product</h3> 
+        </div>
+        <div class="panel-body">
+            <table>
+                <tr><td class="col-md-4">Name</td><td class="col-md-8"><input type="text" [(ngModel)]="newProduct[0].name" placeholder="Product Name" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Description</td><td class="col-md-8"><input type="text" [(ngModel)]="newProduct[0].description" placeholder="Product description" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Brand</td><td class="col-md-8"><input type="text" [(ngModel)]="newProduct[0].brand" placeholder="Brand name" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Price</td><td class="col-md-8"><input type="text" [(ngModel)]="newProduct[0].price" placeholder="Price" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Units</td><td class="col-md-8"><input type="text" [(ngModel)]="newProduct[0].units" placeholder="Number of units" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Picture</td><td class="col-md-8"><input type="text" [(ngModel)]="newProduct[0].picture" placeholder="Picture URL" class="form-control"></td></tr>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <button (click)="addProduct()" class="btn btn-success">Add</button>
+            <span style="color:darkgreen">  * It's necessary to fill all the fields </span>
+        </div>
     </div>
-    <button (click)="actTab()" class="btn btn-default">Actualizar Productos</button>
-    <hr>
-    <table class="table table-bordered">
-        <tr>
-            <th>Id</th>
-            <th>Product</th>
-            <th>Description</th>
-            <th>Brand</th>
-            <th>Price</th>
-            <th>Units</th>
-            <th>Buttons</th>
-        </tr>
-        <tr *ngFor="let product of photos">
-            <td>{{product._id}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.brand}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.units}}</td>
-            <td>
-                <button (click)="updateProduct()" class="btn btn-primary">Edit</button>
-                <button (click)="removeProduct(product._id)" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-    </table>
-</div>
 
-
-
-<!-- cuadros colores
-<div class="panel panel-primary">
-    <div class="panel-heading"></div>
-    <div *ngFor="let photo of photos">
-        <img [src]="photo.thumbnailUrl" alt="">
-        {{photo.id}} && {{photo.title}}
-        <br>
-    </div>
-</div>
-
--->
+    <div class="panel panel-info">
+        <div class="panel panel-heading">
+            <h3 class="panel-title">Products</h3>
+        </div>
+        <div class="panel panel-body">
+            <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Picture</th>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Units</th>
+                <th>Buttons</th>
+            </tr>
+            <tr *ngFor="let product of photos">
+                <td>{{product._id}}</td>
+                <td><img [src]="product.picture" [style.width.px]="100"></td>
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.brand}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.units}}</td>
+                <td>
+                    <button (click)="removeProduct(product._id)" class="btn btn-danger btn-sm" >Delete</button>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div class="panel-footer">
+            <button (click)="actTab()" class="btn btn-primary">Reload</button>
+            <span style="color:cadetblue">  * It's necessary to reload when a change has done </span>
+        </div>    
+    </div> 
 
     
-</div> 
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">Update Product</h3>
+        </div>
+        <div class="panel-body">
+            <table>
+                <tr><td class="col-md-4">ID</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0]._id" placeholder="Product Id to change" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Picture</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0].picture" placeholder="Picture URL" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Name</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0].name" placeholder="Product Name" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Description</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0].description" placeholder="Product description" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Brand</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0].brand" placeholder="Brand name" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Price</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0].price" placeholder="Product price" class="form-control"></td></tr>
+                <tr><td class="col-md-4">Units</td><td class="col-md-8"><input type="text" [(ngModel)]="newUpdate[0].units" placeholder="Number of units" class="form-control"></td></tr>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <button (click)="updateProduct()" class="btn btn-warning">Update</button>
+            <span style="color:chocolate">  * It's necessary to fill all the fields</span>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+
+</footer>
 
 
 
+<!-- 
+<div class="container">
+
+    <br>
+    <div>
+        <label>Name</label> <input type="text" [(ngModel)]="newCat[0].name"> 
+        <label>Race</label> <input type="text" [(ngModel)]="newCat[0].race">
+        <label>Img</label><input type="text" [(ngModel)]="newCat[0].img"> 
+        <button (click)=addCat()>Add</button>   
+    </div>
+
+    <br>    
+    <div>  
+        <table class="table table-bordered">
+            <tr>
+                <th>First Name</th> 
+                <th>Race</th>
+                <th>Description</th> 
+                <th>Image</th> 
+                <th>buttons</th>
+            </tr>
+            <tr *ngFor="let cat of cats">
+                <td>{{cat.name}}</td> 
+                <td>{{cat.race | uppercase | convertToSpace: '-'}}</td> 
+                <td>{{cat.description}}</td>
+                <td (click)="setCurrentCat(cat)"><img [src]="cat.img" [style.width.px]="100"></td>
+                <td>
+                    <button (click)="updateCat()">Edit</button>
+                    <button (click)="removeCat(cat)">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <cat-description [cat]='currentCat'></cat-description> 
+    </div>
+</div>
+-->

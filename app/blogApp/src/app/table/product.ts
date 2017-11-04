@@ -1,8 +1,9 @@
 export interface IProduct{
-    _id: string,
+    _id: String,
     name: String,
     description: String,
     brand: String,
     price: String,
-    units: String
+    units: String,
+    picture: String
 }
